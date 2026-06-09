@@ -1,0 +1,65 @@
+class TrieNode:
+    def __init__(self):
+        self.links=[None,None]
+    
+    def containsKey(self,bit):
+        return self.links[bit] is not None
+
+    def put(self,bit,node):
+        self.links[bit]=node
+
+    def get(self,bit):
+        return self.links[bit]
+
+class Trie:
+    def __init__(self):
+        self.root=TrieNode()
+
+    def insert(self,num):
+        node=self.root
+
+        for i in range(31,-1,-1):
+            bit=(num>>i)&1
+            if not node.containsKey(bit):
+                node.put(bit,TrieNode())
+            node=node.get(bit)
+
+    def maxxor(self,num):
+        node=self.root
+        res=0
+        for i in range(31,-1,-1):
+            bit=(num>>i)&1
+            if node.containsKey(1-bit):
+                res|=(1<<i)
+                node=node.get(1-bit)
+            else:
+                node=node.get(bit)
+
+        return res
+
+    
+
+class Solution:
+    def maximizeXor(self, nums: List[int], queries: List[List[int]]) -> List[int]:
+        nums.sort()
+        offline=[]
+        for idx,(xi,mi) in enumerate(queries):
+            offline.append((mi,xi,idx))
+
+        offline.sort()
+        trie=Trie()
+        res=[-1]*len(queries)
+        i=0
+        n=len(nums)
+
+        for mi,xi,idx in offline:
+            while i<n and nums[i]<=mi:
+                trie.insert(nums[i])
+                i+=1
+
+            if i==0:
+                res[idx]=-1
+            else:
+                res[idx]=trie.maxxor(xi)
+
+        return res
