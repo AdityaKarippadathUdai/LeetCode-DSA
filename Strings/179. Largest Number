@@ -1,0 +1,17 @@
+from functools import cmp_to_key
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        numstr=[str(i) for i in nums]
+        def comp(a,b):
+            if a+b>b+a:
+                return -1
+            else:
+                return 1
+            return 0
+        numstr.sort(key=cmp_to_key(comp))
+        res= "".join(numstr)
+        if res[0]=='0':
+            return '0'
+        else:
+            return res
+
