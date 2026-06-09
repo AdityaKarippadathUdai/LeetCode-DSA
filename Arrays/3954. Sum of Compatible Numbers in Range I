@@ -1,0 +1,11 @@
+class Solution:
+    def sumOfGoodIntegers(self, n: int, k: int) -> int:
+        r=k+n+1
+        l=max(1,n-k)
+        res=0
+        for i in range(l,r):
+            if n&i==0:
+                res+=i
+
+        return res
+                
