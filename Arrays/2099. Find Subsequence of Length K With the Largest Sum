@@ -1,0 +1,15 @@
+class Solution:
+    def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
+        n=len(nums)
+        if n==k:
+            return nums
+        
+        r=sorted(nums)
+        res=nums[:]
+        rem=r[:n-k]
+        for i in range(n):
+            if nums[i] in rem:
+                rem.remove(nums[i])
+                res.remove(nums[i])
+
+        return res
