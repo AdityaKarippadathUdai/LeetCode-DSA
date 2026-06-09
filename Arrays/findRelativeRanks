@@ -1,0 +1,23 @@
+class Solution:
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        rank=score.copy()
+        r=1
+        d={}
+        res=[]
+        heapq.heapify(rank)
+        while rank:
+            p=heapq.heappop(rank)
+            n=len(rank)
+            if n==0:
+                d[p]="Gold Medal"
+            elif n==1:
+                d[p]="Silver Medal"
+            elif n==2:
+                d[p]="Bronze Medal"
+            else:
+                pos=n+1
+                d[p]=str(pos)
+        for sc in score:
+            res.append(d[sc])
+
+        return res
