@@ -1,0 +1,28 @@
+class Solution:
+    def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
+        res=[]
+        before=[]
+        after=[]
+        cnt=0
+        """
+        n=len(nums)
+        for i in range(n):
+            if nums[i]==pivot:
+                cnt+=1
+            elif nums[i]>pivot:
+                after.append(nums[i])
+            else:
+                before.append(nums[i])
+
+        res=before+[pivot]*cnt+after
+        return res
+        """
+        for num in nums:
+            if num==pivot:
+                cnt+=1
+            elif num>pivot:
+                after.append(num)
+            else:
+                before.append(num)
+
+        return before+[pivot]*cnt+after
