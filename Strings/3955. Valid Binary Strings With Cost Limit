@@ -1,0 +1,19 @@
+class Solution:
+    def generateValidStrings(self, n: int, k: int) -> list[str]:
+        res=[]
+        def util(i,path,prev1,cost):
+            if i==n:
+                if cost<=k:
+                    res.append(''.join(path))
+                return
+            path.append('0')
+            util(i+1,path,False,cost)
+            path.pop()
+
+            if not prev1:
+                path.append('1')
+                util(i+1,path,True,cost+i)
+                path.pop()
+
+        util(0,[],False,0)
+        return res
