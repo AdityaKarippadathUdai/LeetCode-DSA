@@ -1,0 +1,36 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
+        nodes={}
+        parent={}
+        for p,c,l in descriptions:
+            if p not in nodes:
+                nodep=TreeNode(p)
+                nodes[p]=nodep
+            else:
+                nodep=nodes[p]
+
+            if c not in nodes:
+                nodec=TreeNode(c)
+                nodes[c]=nodec
+            else:
+                nodec=nodes[c]
+
+            if l==1:
+                nodep.left=nodec
+            else:
+                nodep.right=nodec
+
+            parent[c]=p
+        head=None
+        for p,c,l in descriptions:
+            if p not in parent:
+                head=nodes[p]
+                break
+
+        return head
