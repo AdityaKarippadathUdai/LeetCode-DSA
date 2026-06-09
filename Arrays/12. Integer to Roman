@@ -1,0 +1,63 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        res=[]
+        d={1:"I",5:"V",10:"X",50:"L",100:"C",500:"D",1000:"M"}
+        t=num//1000
+        for i in range(t):
+            res.append("M")
+        num=num%1000
+        h=num//100
+        if h==9:
+            res.append("C")
+            res.append("M")
+        elif h>5:
+            res.append("D")
+            for i in range(h-5):
+                res.append("C")
+        elif h==4:
+            res.append("C")
+            res.append("D")
+        elif h==5:
+            res.append("D")
+        else:
+            for i in range(h):
+                res.append("C")
+
+        num=num%100
+        ten=num//10
+        if ten==9:
+            res.append("X")
+            res.append("C")
+        elif ten>5:
+            res.append("L")
+            for i in range(ten-5):
+                res.append("X")
+        elif ten==4:
+            res.append("X")
+            res.append("L")
+        elif ten==5:
+            res.append("L")
+        else:
+            for i in range(ten):
+                res.append("X")
+
+        num=num%10
+        one=num
+        if one==9:
+            res.append("I")
+            res.append("X")
+        elif one>5:
+            res.append("V")
+            for i in range(one-5):
+                res.append("I")
+        elif one==4:
+            res.append("I")
+            res.append("V")
+        elif one==5:
+            res.append("V")
+        else:
+            for i in range(one):
+                res.append("I")
+
+        return "".join(res)
+                
