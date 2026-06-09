@@ -1,0 +1,9 @@
+import heapq
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        for i in range(len(nums)):
+            nums[i]=-nums[i]
+        heapq.heapify(nums)
+        a=-heappop(nums)
+        b=-heappop(nums)
+        return (a-1)*(b-1)
