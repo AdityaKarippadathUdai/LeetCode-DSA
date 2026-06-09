@@ -1,0 +1,22 @@
+class Solution:
+    def minEnergy(self, n: int, brightness: int, intervals: list[list[int]]) -> int:
+        bul=(brightness+2)//3
+        
+        t=0
+        intervals.sort()
+        mi=[]
+        mi.append(intervals[0])
+        for i in range(1,len(intervals)):
+            p=mi[-1]
+            curr=intervals[i]
+            if curr[0]<=p[1]:
+                p[1]=max(p[1],curr[1])
+            else:
+                mi.append(curr)
+        
+        for s,e in mi:
+            dur=e-s+1
+            t+=dur
+
+        return t*bul
+        
