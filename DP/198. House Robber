@@ -1,0 +1,20 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        
+        n=len(nums)
+        r={}
+        if n==1:
+            return nums[0]
+        def recur(i):
+            if i>=n:
+                return 0
+
+            if i in r:
+                return r[i]
+            a=nums[i]+recur(i+2)
+            b=recur(i+1)
+
+            r[i]=max(a,b)
+            return max(a,b)
+
+        return recur(0)
