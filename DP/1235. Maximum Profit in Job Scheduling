@@ -1,0 +1,32 @@
+class Solution:
+    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
+        n=len(startTime)
+        jobs=[]
+        for i in range(n):
+            jobs.append([startTime[i],endTime[i],profit[i]])
+
+        jobs.sort()
+        dp=[-1]*n
+        def recur(jobs,ind,dp,n):
+            if ind>=len(jobs):
+                return 0
+            if dp[ind]!=-1:
+                return dp[ind]
+
+            nt=recur(jobs,ind+1,dp,n)
+            low=ind+1
+            high=n-1
+            idx=n
+            while low<=high:
+                mid=(low+high)//2
+                if jobs[mid][0]>=jobs[ind][1]:
+                    idx=mid
+                    high=mid-1
+                else:
+                    low=mid+1
+
+            tk=jobs[ind][2]+recur(jobs,idx,dp,n)
+            dp[ind]=max(tk,nt)
+            return dp[ind]
+
+        return recur(jobs,0,dp,n)
