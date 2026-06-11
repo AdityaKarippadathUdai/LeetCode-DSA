@@ -1,0 +1,35 @@
+from collections import defaultdict
+from collections import deque
+sys.set_int_max_str_digits(10**5+1) 
+class Solution:
+    def assignEdgeWeights(self, edges: List[List[int]]) -> int:
+        adj=defaultdict(list)
+        for edge in edges:
+            adj[edge[0]].append(edge[1])
+            adj[edge[1]].append(edge[0])
+
+        depth=0
+
+        if not edges:
+            return 0
+        q=deque()
+        q.append(1)
+        st=set()
+        st.add(1)
+        while q:
+            depth+=1
+            for _ in range(len(q)):
+                node=q.popleft()
+                if not adj[node]:
+                    continue
+
+                for n in adj[node]:
+                    if n not in st:
+                        q.append(n)
+                        st.add(n)
+        path=depth-1
+        if path ==1 or path ==2:
+            return path
+
+        return 2**(path-1)%(10**9+7)
+        
