@@ -1,0 +1,11 @@
+class Solution:
+    def makeSmallestPalindrome(self, s: str) -> str:
+        ls=list(s)
+        n=len(ls)
+        for i in range(n//2):
+            j=n-1-i
+            c=min(ls[i],ls[j])
+            ls[i]=c
+            ls[j]=c
+
+        return "".join(ls)
