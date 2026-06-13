@@ -1,0 +1,19 @@
+class Solution:
+    def mapWordWeights(self, words: List[str], weights: List[int]) -> str:
+        d={}
+        j=25
+        for i in range(26):
+            d[j]=chr(i+ord('a'))
+            j-=1
+
+        res=[]
+        for word in words:
+            total=0
+            for i in range(len(word)):
+                ind=ord(word[i])-ord('a')
+                total+=weights[ind]
+
+            total=total%26
+            res.append(d[total])
+
+        return "".join(res)
