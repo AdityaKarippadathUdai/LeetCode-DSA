@@ -1,0 +1,15 @@
+class Solution:
+    def totalSteps(self, nums: List[int]) -> int:
+        st=[]
+        n=len(nums)
+        res=0
+        dp=[0]*n
+        for i in range(n-1,-1,-1):
+            s=0
+            while st and nums[st[-1]]<nums[i]:
+                dp[i]=max(dp[i]+1,dp[st[-1]])
+                st.pop()
+            st.append(i)
+            res=max(res,dp[i])
+
+        return res
