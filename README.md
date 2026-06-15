@@ -46,6 +46,13 @@
 
 </div>
 
+## 🔥 LeetCode Activity
+
+<p align="center">
+    
+  <img src="https://leetcode-badge-showcase.vercel.app/api?username=AdityaUdai&theme=dark" alt="LeetCode Badges" />
+
+</p>
 
 ---
 
