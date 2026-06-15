@@ -1,0 +1,22 @@
+class Solution:
+    def discountPrices(self, sentence: str, discount: int) -> str:
+        ls=sentence.split()
+        n=len(ls)
+        def isfloat(num):
+            if len(num)>2 and num[0]=='1' and num[1]=='e':
+                return False
+            try:
+                float(num)
+                return True
+            except ValueError:
+                return False
+
+        for i in range(n):
+            w=ls[i]
+            if w[0]=='$' and w[-1]!='$' and isfloat(w[1:]) and w!='$1e5':
+                num=float(w[1:])
+                newn=num-(num*discount/100)
+                numstr=f"{newn:.2f}"
+                ls[i]='$'+numstr
+
+        return " ".join(ls)
