@@ -1,0 +1,15 @@
+class Solution:
+    def processStr(self, s: str) -> str:
+        res=[]
+        for a in s:
+            if a=='*':
+                if res:
+                    res.pop()
+            elif a=='#':
+                res=res+res
+            elif a=='%':
+                res.reverse()
+            else:
+                res.append(a)
+
+        return "".join(res)
