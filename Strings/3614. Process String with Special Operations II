@@ -1,0 +1,33 @@
+class Solution:
+    def processStr(self, s: str, k: int) -> str:
+        n=len(s)
+        arr=[0]*(n+1)
+
+        for i,ch in enumerate(s):
+            if 'a'<=ch<='z':
+                arr[i+1]=arr[i]+1
+            elif ch=='*':
+                arr[i+1]=max(0,arr[i]-1)
+            elif ch=='#':
+                arr[i+1]=arr[i]*2
+            else:
+                arr[i+1]=arr[i]
+
+
+        if k>=arr[n]:
+            return '.'
+
+        for i in range(n-1,-1,-1):
+            ch=s[i]
+            prev=arr[i]
+
+            if 'a'<=ch<='z':
+                if k==prev:
+                    return ch
+            elif ch=='#':
+                if k>=prev:
+                    k-=prev
+            elif ch=='%':
+                k=prev-1-k
+
+        return '.'
