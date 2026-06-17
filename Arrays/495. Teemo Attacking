@@ -1,0 +1,11 @@
+class Solution:
+    def findPoisonedDuration(self, timeSeries: List[int], duration: int) -> int:
+        res=0
+        start=0
+        for a in timeSeries:
+            start=max(a,start)
+            end=a+duration
+            res+=end-start
+            start=end
+
+        return res
