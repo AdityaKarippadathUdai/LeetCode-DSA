@@ -1,0 +1,23 @@
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        n=len(nums)
+        res=[]
+        ele=nums[0]
+        cnt=0
+        for i in range(n):
+            if nums[i]==ele:
+                cnt+=1
+            else:
+                ele=nums[i]
+                cnt=1
+            
+            if cnt>2:
+                continue
+            else:
+                res.append(nums[i])
+
+        m=len(res)
+        for i in range(m):
+            nums[i]=res[i]
+
+        return m
