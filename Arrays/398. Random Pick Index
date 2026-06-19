@@ -1,0 +1,17 @@
+from itertools import accumulate
+from bisect import bisect_left
+from random import randint
+class Solution:
+
+    def __init__(self, w: List[int]):
+        self.pre=list(accumulate(w))
+        self.total=self.pre[-1]
+
+    def pickIndex(self) -> int:
+        target=randint(1,self.total)
+        return bisect_left(self.pre,target)
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(w)
+# param_1 = obj.pickIndex()
