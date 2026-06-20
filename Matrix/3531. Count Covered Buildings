@@ -1,0 +1,37 @@
+class Solution:
+    def countCoveredBuildings(self, n: int, buildings: List[List[int]]) -> int:
+        dir=[(1,0),(0,1),(-1,0),(0,-1)]
+        rows=defaultdict(int)
+        cols=defaultdict(int)
+        rowind=defaultdict(list)
+        colind=defaultdict(list)
+        for i,j in buildings:
+            rows[i]+=1
+            cols[j]+=1
+            rowind[i].append(j)
+            colind[j].append(i)
+
+        rowmin=defaultdict(int)
+        rowmax=defaultdict(int)
+        colmin=defaultdict(int)
+        colmax=defaultdict(int)
+        
+        for r,arr in rowind.items():
+            rowmin[r]=min(arr)
+            rowmax[r]=max(arr)
+
+        for c,arr in colind.items():
+            colmin[c]=min(arr)
+            colmax[c]=max(arr)
+
+        res=0
+        for x,y in buildings:
+            if rows[x]>=3 and cols[y]>=3:
+                lc=rowmin[x]
+                rc=rowmax[x]
+                tr=colmax[y]
+                br=colmin[y]
+                if lc<y<rc and br<x<tr:
+                    res+=1
+
+        return res
