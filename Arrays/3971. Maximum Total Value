@@ -1,0 +1,32 @@
+class Solution:
+    def maxTotalValue(self, value: list[int], decay: list[int], m: int) -> int:
+        MOD=10**9+7
+
+        def cntget(y):
+            cnt=0
+            for v,d in zip(value,decay):
+                if v>=y:
+                    cnt+=(v-y)//d+1
+            return cnt
+
+        l=1
+        r=max(value)
+        while l<=r:
+            mid=(l+r)//2
+            if cntget(mid)>=m:
+                l=mid+1
+            else:
+                r=mid-1
+
+        z=r
+
+        t=0
+        k=0
+        for v,d in zip(value,decay):
+            if v<=z:
+                continue
+            c=(v-(z+1))//d+1
+            k+=c
+            t+=c*v-d*c*(c-1)//2
+        res=t+(m-k)*z
+        return res%MOD
