@@ -1,0 +1,33 @@
+import heapq
+class Solution:
+    def shortestPath(self, n: int, edges: List[List[int]], labels: str, k: int) -> int:
+        m=[[] for _ in range(n)]
+        for u,v,w in edges:
+            m[u].append((v,w))
+
+        maxi=10**18
+        dis=[[maxi]*(k+1) for _ in range(n)]
+
+        dis[0][1]=0
+        q=[(0,0,1)]
+
+        while q:
+            cost,u,streak=heapq.heappop(q)
+            if cost!=dis[u][streak]:
+                continue
+            for v,w in m[u]:
+                if labels[v]==labels[u]:
+                    s=streak+1
+                else:
+                    s=1
+                if s>k:
+                    continue
+                d=cost+w
+                if d<dis[v][s]:
+                    dis[v][s]=d
+                    heappush(q,(d,v,s))
+        res=min(dis[n-1])
+        if res==maxi:
+            return -1
+        else:
+            return res
