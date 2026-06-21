@@ -1,0 +1,20 @@
+class Solution:
+    def maxDistance(self, moves: str) -> int:
+        i=0
+        j=0
+        k=0
+
+        for m in moves:
+            if m=='R':
+                i+=1
+            elif m=='L':
+                i-=1
+            elif m=='U':
+                j+=1
+            elif m=='D':
+                j-=1
+            else:
+                k+=1
+
+        res=abs(i)+abs(j)+k
+        return res
