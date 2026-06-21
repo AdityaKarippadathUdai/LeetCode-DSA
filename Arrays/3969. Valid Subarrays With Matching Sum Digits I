@@ -1,0 +1,25 @@
+class Solution:
+    def countValidSubarrays(self, nums: list[int], x: int) -> int:
+        n=len(nums)
+        pre=[0]*(n+1)
+        for i in range(n):
+            pre[i+1]=pre[i]+nums[i]
+
+        def util(n):
+            while n>=10:
+                n//=10
+            return n
+
+        res=0
+
+        for i in range(n):
+            for j in range(i,n):
+                s=pre[j+1]-pre[i]
+
+                if s%10!=x:
+                    continue
+
+                if util(s)==x:
+                    res+=1
+        return res
+        
