@@ -1,5 +1,7 @@
 # 🚀 Aditya Udai's LeetCode & DSA Journey
 
+
+
 <div align="center">
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=28&pause=1000&color=36BCF7&center=true&vCenter=true&width=700&lines=Data+Structures+%26+Algorithms;LeetCode+Problem+Solver;Competitive+Programmer;Aspiring+Software+Engineer;Always+Learning+%F0%9F%9A%80" alt="Typing SVG" />
@@ -9,7 +11,14 @@
 ![Profile Views](https://komarev.com/ghpvc/?username=AdityaKarippadathUdai\&label=Profile%20Views\&color=0e75b6\&style=flat)
 ![GitHub followers](https://img.shields.io/github/followers/AdityaKarippadathUdai?label=Followers\&style=social)
 ![GitHub stars](https://img.shields.io/github/stars/AdityaKarippadathUdai/LeetCode-DSA?style=social)
-
+![Repo Size](https://img.shields.io/github/repo-size/AdityaKarippadathUdai/LeetCode-DSA)
+![Last Commit](https://img.shields.io/github/last-commit/AdityaKarippadathUdai/LeetCode-DSA)
+![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
+![LeetCode](https://img.shields.io/badge/LeetCode-Problem%20Solver-orange?logo=leetcode)
+![DSA](https://img.shields.io/badge/DSA-Data%20Structures%20%26%20Algorithms-success)
+![Problems Solved](https://img.shields.io/badge/Problems-Solving-brightgreen)
+![Interview Prep](https://img.shields.io/badge/Interview-Preparation-red)
+![Competitive Programming](https://img.shields.io/badge/Competitive-Programming-purple)
 </div>
 
 ---
