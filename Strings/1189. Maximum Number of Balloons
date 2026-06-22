@@ -1,0 +1,17 @@
+class Solution:
+    def maxNumberOfBalloons(self, text: str) -> int:
+        n=len(text)
+        s=['b','a','l','l','o','o','n']
+        d=Counter(s)
+        h=defaultdict(int)
+        for ch in text:
+            if ch in s:
+                h[ch]+=1
+
+        res=float('inf')
+        for ch,val in d.items():
+            if h[ch]==0:
+                return 0
+            res=min(res,h[ch]//val)
+        
+        return res
