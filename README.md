@@ -54,6 +54,13 @@
 
 </p>
 
+
+## 📅 Submission Heatmap
+
+<p align="center">
+  <img src="https://leetcard.jacoblin.cool/AdityaUdai?theme=dark&font=Karma&ext=heatmap" />
+</p>
+
 ---
 
 # 📚 DSA Topics Covered
