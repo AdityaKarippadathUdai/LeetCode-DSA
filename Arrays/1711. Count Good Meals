@@ -1,0 +1,20 @@
+class Solution:
+    def countPairs(self, deliciousness: List[int]) -> int:
+        n=len(deliciousness)
+        maxi=max(deliciousness)
+
+
+        a=1
+        pow2=[]
+        while a<=2*maxi:
+            pow2.append(a)
+            a<<=1
+        
+        res=0
+        h=defaultdict(int)
+        for i in range(n):
+            a=deliciousness[i]
+            for num in pow2:
+                res+=h[num-a]
+            h[a]+=1
+        return res%(10**9+7)
