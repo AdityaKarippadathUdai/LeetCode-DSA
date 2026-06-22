@@ -1,0 +1,16 @@
+class Solution:
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        h=defaultdict(int)
+        n=len(nums)
+        res=0
+        for i in range(n):
+            a=nums[i]
+            if k-a in h:
+                res+=1
+                h[k-a]-=1
+                if h[k-a]==0:
+                    del h[k-a]
+            else:
+                h[a]+=1
+
+        return res
