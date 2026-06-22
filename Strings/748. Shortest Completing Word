@@ -1,0 +1,23 @@
+class Solution:
+    def shortestCompletingWord(self, licensePlate: str, words: List[str]) -> str:
+        licensePlate=licensePlate.lower()
+        h=defaultdict(int)
+        for ch in licensePlate:
+            if 'a'<=ch<='z':
+                h[ch]+=1
+        words.sort(key=len)
+        for word in words:
+            d=Counter(word)
+            res=True
+            for ch,val in h.items():
+                if ch not in d:
+                    res=False
+                    break
+                if d[ch]<h[ch]:
+                    res=False
+                    break
+                if d[ch]>=h[ch]:
+                    res+=val
+            if res:
+                return word
+                
