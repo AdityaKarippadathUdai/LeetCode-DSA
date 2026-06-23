@@ -1,0 +1,31 @@
+class Solution:
+    def zigZagArrays(self, n: int, l: int, r: int) -> int:
+        
+        MOD=10**9+7
+        m=r-l+1
+        up=[0]*(m+1)
+        down=[0]*(m+1)
+        for i in range(1,m+1):
+            up[i]=i-1
+            down[i]=m-i
+
+        for _ in range(3,n+1):
+            pred=[0]*(m+1)
+            preup=[0]*(m+1)
+
+            for i in range(1,m+1):
+                pred[i]=(pred[i-1]+down[i])%MOD
+                preup[i]=(preup[i-1]+up[i])%MOD
+            
+            wup=preup[m]
+
+            nup=[0]*(m+1)
+            nd=[0]*(m+1)
+
+            for j in range(1,m+1):
+                nup[j]=pred[j-1]
+                nd[j]=(wup-preup[j])%MOD
+
+            up,down=nup,nd
+
+        return (sum(up)+sum(down))%MOD
