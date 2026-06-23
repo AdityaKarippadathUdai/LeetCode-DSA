@@ -1,0 +1,15 @@
+class Solution:
+    def minCost(self, s: str, cost: List[int]) -> int:
+        res=0
+        h=defaultdict(int)
+        maxc=0
+        total=0
+        n=len(s)
+        for i in range(n):
+            h[s[i]]+=cost[i]
+            total+=cost[i]
+            if h[s[i]]>maxc:
+                maxc=h[s[i]]
+
+        res=total-maxc
+        return res
