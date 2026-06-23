@@ -1,0 +1,22 @@
+class Solution:
+    def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
+        
+        n=len(recipes)
+        q=deque(supplies)
+        h=defaultdict(list)
+        d=defaultdict(int)
+        for i in range(n):
+            d[recipes[i]]=len(ingredients[i])
+            for ingred in ingredients[i]:
+                h[ingred].append(recipes[i])
+
+        res=[]
+        while q:
+            food=q.popleft()
+            for r in h[food]:
+                d[r]-=1
+                if d[r]==0:
+                    res.append(r)
+                    q.append(r)
+
+        return res
