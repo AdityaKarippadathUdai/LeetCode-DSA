@@ -1,0 +1,14 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        st=set()
+        num=n
+        while True:
+            ls=list(str(num))
+            a=sum([int(i)*int(i) for i in ls])
+            if a in st:
+                return False
+            st.add(a)
+            if a==1:
+                return True
+
+            num=a
