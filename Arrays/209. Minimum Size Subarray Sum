@@ -1,0 +1,26 @@
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        pref=0
+        d={}
+        n=len(nums)
+        res=float('inf')
+        j=0
+        for i in range(n):
+            pref+=nums[i]
+            if target==nums[i]:
+                return 1
+    
+            while pref>=target and j<n:
+                res=min(res,i-j+1)
+                pref-=nums[j]
+                j+=1
+
+            if pref-target in d:
+                res=min(res,i-d[pref-target])
+
+            d[pref]=i
+
+        if res==float('inf'):
+            return 0
+        
+        return res
