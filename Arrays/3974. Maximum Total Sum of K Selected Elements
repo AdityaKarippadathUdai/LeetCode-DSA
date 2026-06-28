@@ -1,0 +1,10 @@
+class Solution:
+    def maxSum(self, nums: list[int], k: int, mul: int) -> int:
+        nums.sort(reverse=True)
+        res=sum(nums[:k])
+        x=min(k,mul-1)
+
+        for i in range(x):
+            res+=nums[i]*(mul-i-1)
+
+        return res
