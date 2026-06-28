@@ -1,0 +1,24 @@
+class Solution:
+    def filterOccupiedIntervals(self, occupiedIntervals: List[List[int]], freeStart: int, freeEnd: int) -> List[List[int]]:
+        m=[]
+        occupiedIntervals.sort()
+
+        for b,e in occupiedIntervals:
+            if not m or b>m[-1][1]+1:
+                m.append([b,e])
+            else:
+                m[-1][1]=max(m[-1][1],e)
+
+
+        res=[]
+
+        for s,e in m:
+            if s>freeEnd or e<freeStart:
+                res.append([s,e])
+            else:
+                if s<freeStart:
+                    res.append([s,freeStart-1])
+                if e>freeEnd:
+                    res.append([freeEnd+1,e])
+
+        return res
