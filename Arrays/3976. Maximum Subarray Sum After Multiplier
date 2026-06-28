@@ -1,0 +1,33 @@
+class Solution:
+    def maxSubarraySum(self, nums: List[int], k: int) -> int:
+        MAXI=float('-inf')
+
+        def util(func):
+            curr=MAXI
+            prev=MAXI
+            nxt=MAXI
+            res=MAXI
+
+            for a in nums:
+                b=func(a)
+                nprev=max(a,prev+b)
+                ncurr=max(b,prev+b,curr+b)
+                nnxt=max(curr+a,nxt+a)
+
+                curr=ncurr
+                prev=nprev
+                nxt=nnxt
+                res=max(res,curr,nnxt)
+
+            return res
+
+        def div(x):
+            if x>=0:
+                return x//k
+            else:
+                return -((-x)//k)
+
+        def mult(x):
+            return x*k
+
+        return max(util(div),util(mult))
