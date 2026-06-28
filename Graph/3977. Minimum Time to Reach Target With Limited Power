@@ -1,0 +1,40 @@
+class Solution:
+    def minTimeMaxPower(self, n: int, edges: List[List[int]], power: int, cost: List[int], source: int, target: int) -> List[int]:
+        adj=[[] for _ in range(n)]
+
+        for u,v,t in edges:
+            adj[u].append((v,t))
+
+        MAXI=float('inf')
+
+        dis=[[MAXI]*(power+1) for _ in range(n)]
+
+        q=[(0,source,power)]
+
+        dis[source][power]=0
+
+        while q:
+            t,u,r=heapq.heappop(q)
+
+            if t!=dis[u][r]:
+                continue
+
+            if r<cost[u]:
+                continue
+
+            np=r-cost[u]
+
+            for v,w in adj[u]:
+                nt=t+w
+
+                if nt<dis[v][np]:
+                    dis[v][np]=nt
+                    heapq.heappush(q,(nt,v,np))
+
+        res=min(dis[target])
+        if res==MAXI:
+            return [-1,-1]
+
+        for p in range(power,-1,-1):
+            if dis[target][p]==res:
+                return [res,p]
