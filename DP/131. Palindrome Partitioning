@@ -1,0 +1,29 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        def ispalindrome(l,r):
+            i=l
+            j=r
+            while i<j:
+                if s[i]!=s[j]:
+                    return False
+                i+=1
+                j-=1
+            return True
+        n=len(s)
+        res=0
+        res=[]
+        path=[]
+        def util(ind):
+            if ind==n:
+                res.append(path[:])
+                return 
+            
+            for i in range(ind,n):
+                if ispalindrome(ind,i):
+                    path.append(s[ind:i+1])
+                    util(i+1)
+                    path.pop()
+
+        util(0)
+        return res
+        
