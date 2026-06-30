@@ -1,0 +1,32 @@
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        s=sum(nums)
+        if s%k!=0:
+            return False
+        n=len(nums)
+        targ=s//k
+        if max(nums)>targ:
+            return False
+
+        div=[0]*k
+        nums.sort(reverse=True)
+
+        def util(ind):
+            if ind==n:
+                return True
+
+            for i in range(k):
+                if div[i]+nums[ind]>targ:
+                    continue
+                
+                div[i]+=nums[ind]
+                if util(ind+1):
+                    return True
+                div[i]-=nums[ind]
+
+                if div[i]==0:
+                    break
+
+            return False
+
+        return util(0)
