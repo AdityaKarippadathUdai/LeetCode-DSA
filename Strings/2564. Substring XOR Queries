@@ -1,0 +1,25 @@
+class Solution:
+    def substringXorQueries(self, s: str, queries: List[List[int]]) -> List[List[int]]:
+        mp={}
+
+        n=len(s)
+
+        for i in range(n):
+            if s[i]=='0':
+                if 0 not in mp:
+                    mp[0]=[i,i]
+                continue
+
+            val=0
+            for j in range(i,min(n,i+30)):
+                val=(val<<1) | (ord(s[j])-ord('0'))
+                if val not in mp:
+                    mp[val]=[i,j]
+
+        res=[]
+        for f,s in queries:
+            tar=f^s
+            res.append(mp.get(tar,[-1,-1]))
+
+        return res
+            
