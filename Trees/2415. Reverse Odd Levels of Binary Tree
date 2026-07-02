@@ -1,0 +1,36 @@
+from collections import deque
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        q=deque()
+        if not root:
+            return None
+
+        nroot=TreeNode(root.val)
+        nq=deque()
+        q.append(root)
+        nq.append(nroot)
+        level=0
+        while q:
+            if level%2==1:
+                n=len(q)
+                for i in range(n//2):
+                    nodel=q[i]
+                    noder=q[-i-1]
+                    noder.val,nodel.val=nodel.val,noder.val
+            
+            n=len(q)
+            for i in range(n):
+                node=q.popleft()
+                if node.left and node.right:
+                    q.append(node.left)
+                    q.append(node.right)
+            level+=1
+
+        return root
+
