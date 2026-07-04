@@ -1,0 +1,22 @@
+class Solution:
+    def minScore(self, n: int, roads: List[List[int]]) -> int:
+        adj=[[] for i in range(n+1)]
+
+        for u,v,dis in roads:
+            adj[u].append((v,dis))
+            adj[v].append((u,dis))
+        res=float('inf')
+        minc=float('inf')
+        q=deque()
+        q.append((1,float('inf')))
+        st=set()
+        while q:
+            node,dis=q.popleft()
+            res=min(res,dis)
+            for v,c in adj[node]:
+                if (node,v) in st or (v,node) in st:
+                    continue
+                st.add((node,v))
+                q.append((v,c))
+
+        return res
