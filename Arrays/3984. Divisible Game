@@ -1,0 +1,40 @@
+class Solution:
+    def divisibleGame(self, nums: list[int]) -> int:
+        MOD=10**9+7
+
+        st=set()
+        for a in nums:
+            d=2
+            while d*d<=a:
+                if a%d==0:
+                    st.add(d)
+                    st.add(a//d)
+                d+=1
+            if a>1:
+                st.add(a)
+
+        ms=float('-inf')
+        mk=2
+
+        for d in st:
+            curr=float('-inf')
+            maxi=float('-inf')
+
+            for x in nums:
+                v=x if x%d==0 else -x
+                curr=max(v,curr+v)
+                maxi=max(maxi,curr)
+            if maxi>ms or (maxi==ms and d<mk):
+                ms=maxi
+                mk=d
+
+        k=2 
+        while k in st:
+            k+=1
+
+        sc=-min(nums)
+        if sc>ms or (sc==ms and k<mk):
+            ms=sc
+            mk=k
+
+        return (ms*mk)%MOD
