@@ -1,0 +1,23 @@
+class Solution:
+    def maxDigitRange(self, nums: list[int]) -> int:
+        def util(num):
+            mini=9
+            maxi=0
+            while num>0:
+                dig=num%10
+                mini=min(dig,mini)
+                maxi=max(dig,maxi)
+                num=num//10
+
+            return maxi-mini
+        maxr=-1
+        res=0
+        for x in nums:
+            rangex=util(x)
+            if rangex>maxr:
+                maxr=rangex
+                res=x
+            elif rangex==maxr:
+                res+=x
+
+        return res
