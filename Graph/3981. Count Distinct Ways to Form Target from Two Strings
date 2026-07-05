@@ -1,0 +1,64 @@
+from collections import defaultdict
+from bisect import bisect_left
+
+class Solution:
+    def interleaveCharacters(self, word1: str, word2: str, target: str) -> int:
+        MOD = 10**9 + 7
+
+        n1, n2, n3 = len(word1), len(word2), len(target)
+
+        pos1 = defaultdict(list)
+        pos2 = defaultdict(list)
+
+        for i, c in enumerate(word1):
+            pos1[c].append(i)
+
+        for i, c in enumerate(word2):
+            pos2[c].append(i)
+
+        # dp[ind][i][j][mask]
+        dp = [[[[0] * 4 for _ in range(n2 + 1)]
+               for _ in range(n1 + 1)]
+              for _ in range(n3 + 1)]
+
+        dp[0][0][0][0] = 1
+
+        for ind in range(n3):
+            ch = target[ind]
+
+            for i in range(n1 + 1):
+                for j in range(n2 + 1):
+                    for mask in range(4):
+
+                        cur = dp[ind][i][j][mask]
+                        if cur == 0:
+                            continue
+
+                        # Choose from word1
+                        lst = pos1[ch]
+                        p = bisect_left(lst, i)
+
+                        while p < len(lst):
+                            ni = lst[p] + 1
+                            dp[ind + 1][ni][j][mask | 1] = (
+                                dp[ind + 1][ni][j][mask | 1] + cur
+                            ) % MOD
+                            p += 1
+
+                        # Choose from word2
+                        lst = pos2[ch]
+                        p = bisect_left(lst, j)
+
+                        while p < len(lst):
+                            nj = lst[p] + 1
+                            dp[ind + 1][i][nj][mask | 2] = (
+                                dp[ind + 1][i][nj][mask | 2] + cur
+                            ) % MOD
+                            p += 1
+
+        ans = 0
+        for i in range(n1 + 1):
+            for j in range(n2 + 1):
+                ans = (ans + dp[n3][i][j][3]) % MOD
+
+        return ans
