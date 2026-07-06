@@ -1,0 +1,39 @@
+from functools import lru_cache
+class Solution:
+    def pathsWithMaxScore(self, board: List[str]) -> List[int]:
+        res=[0,0]
+        n=len(board)
+        dir=[(-1,0),(-1,-1),(0,-1)]
+        MOD=10**9+7
+
+
+        @lru_cache(None)
+        def util(i,j):
+            nonlocal res
+            if i==0 and j==0:
+                return [0,1]
+            
+            sc=-1
+            w=0
+            for dx,dy in dir:
+                nx=i+dx
+                ny=j+dy
+                if 0<=nx<n and 0<=ny<n and board[nx][ny]!='X':
+                    score,ways=util(nx,ny)
+                    if score>sc:
+                        sc=score
+                        w=ways
+                    elif score==sc:
+                        w=(ways+w)%MOD
+
+            if w==0:
+                return [-1,0]
+
+            val=0 if board[i][j] in 'ES' else int(board[i][j])
+
+            return [sc+val,w]
+
+        res=util(n-1,n-1)
+        if res[1]==0:
+            return [0,0]
+        return res
