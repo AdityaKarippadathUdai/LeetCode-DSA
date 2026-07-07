@@ -1,0 +1,14 @@
+class Solution:
+    def addDigits(self, num: int) -> int:
+        
+        res=num
+        
+        while res>=10:
+            ls=list(str(res))
+            a=0
+            for ch in ls:
+                a+=int(ch)
+
+            res=a
+
+        return res
