@@ -1,0 +1,29 @@
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        n=len(matrix)
+
+        def util(x):
+            row=n-1
+            col=0
+
+            cnt=0
+            while row>=0 and col<n:
+                if matrix[row][col]<=x:
+                    cnt+=row+1
+                    col+=1
+                else:
+                    row-=1
+
+            return cnt
+
+        l=matrix[0][0]
+        r=matrix[-1][-1]
+
+        while l<r:
+            mid=(l+r)//2
+            if util(mid)<k:
+                l=mid+1
+            else:
+                r=mid
+
+        return l
