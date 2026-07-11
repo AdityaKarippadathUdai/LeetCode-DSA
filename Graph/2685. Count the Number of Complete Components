@@ -1,0 +1,54 @@
+class Solution:
+    def countCompleteComponents(self, n: int, edges: List[List[int]]) -> int:
+        components=[]
+
+        vis=set()
+        adj=defaultdict(list)
+
+        for u,v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+
+        for i in range(n):
+            if i in vis:
+                continue
+
+            q=deque()
+            q.append(i)
+            c=[]
+            vis.add(i)
+            while q:
+                node=q.popleft()
+                for v in adj[node]:
+                    if v in vis:
+                        continue
+                    q.append(v)
+                    vis.add(v)
+                c.append(node)
+
+            components.append(c)
+        
+        res=0
+        for comp in components:
+            m=len(comp)
+            if m==1:
+                res+=1
+                continue
+
+            conn=True
+            for i in range(m):
+                for j in range(i+1,m):
+                    a=comp[i]
+                    b=comp[j]
+
+                    if b not in adj[a]:
+                        conn=False
+                        break
+
+                if not conn:
+                    break
+
+            if conn:
+                res+=1
+        return res
+        
