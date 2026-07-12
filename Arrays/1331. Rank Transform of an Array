@@ -1,0 +1,17 @@
+class Solution:
+    def arrayRankTransform(self, arr: List[int]) -> List[int]:
+        nums=sorted(arr)
+        d={}
+        n=len(arr)
+        rnk=1
+        for i in range(n):
+            if nums[i] in d:
+                continue
+            d[nums[i]]=rnk
+            rnk+=1
+
+        res=[]
+        for a in arr:
+            res.append(d[a])
+
+        return res
