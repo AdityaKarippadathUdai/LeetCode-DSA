@@ -1,0 +1,19 @@
+class Solution:
+    def sequentialDigits(self, low: int, high: int) -> List[int]:
+        res=[]
+
+        def util(s):
+            sint=str(s)
+            num=sint
+            while int(num)<=high:
+                a=int(num)
+                if a>=low:
+                    res.append(a)
+                if num[-1]=='9':
+                    break
+                num=num+str(int(num[-1])+1)
+
+        for i in range(1,10):
+            util(i)
+        res.sort()
+        return res              
