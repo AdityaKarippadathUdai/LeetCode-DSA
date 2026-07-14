@@ -1,0 +1,31 @@
+from collections import defaultdict
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findFrequentTreeSum(self, root: Optional[TreeNode]) -> List[int]:
+        freq=defaultdict(int)
+        mfreq=0
+
+        def dfs(node):
+            nonlocal mfreq
+
+            if not node:
+                return 0
+
+            lsum=dfs(node.left)
+            rsum=dfs(node.right)
+
+            total=lsum+rsum+node.val
+
+            freq[total]+=1
+            mfreq=max(mfreq,freq[total])
+
+            return total
+
+        dfs(root)
+
+        return [i for i,cnt in freq.items() if cnt==mfreq ]
