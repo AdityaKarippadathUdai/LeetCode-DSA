@@ -1,0 +1,17 @@
+class Solution:
+    def smallestSubsequence(self, s: str) -> str:
+        freq = Counter(s)
+        st = set()
+        arr = []
+
+        for c in s:
+            freq[c] -= 1
+            if c in st: continue
+
+            while arr and arr[-1] > c and freq[arr[-1]]:
+                st.remove(arr.pop())
+
+            arr.append(c)
+            st.add(c)
+
+        return "".join(arr)
