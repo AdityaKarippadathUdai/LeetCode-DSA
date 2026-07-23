@@ -1,0 +1,20 @@
+class Solution:
+    def optimalDivision(self, nums: List[int]) -> str:
+        n=len(nums)
+        res=''
+        res=res+str(nums[0])
+        if n==1:
+            return res
+        if n==2:
+            res=res+'/'+str(nums[1])
+            return res
+        res=res+'/'+'('
+        for i in range(1,n):
+            if i==n-1:
+                res=res+str(nums[i])
+                break
+
+            res=res+str(nums[i])
+            res=res+'/'
+        res=res+')'
+        return res
