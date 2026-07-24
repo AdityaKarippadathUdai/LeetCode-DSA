@@ -1,0 +1,32 @@
+class Solution:
+    def uniqueXorTriplets(self, nums: List[int]) -> int:
+        MAXI = 2048  
+
+        f = [0] * MAXI
+        for x in nums:
+            f[x] = 1
+
+        def util(a, inverse=False):
+            n = len(a)
+            h = 1
+            while h < n:
+                for i in range(0, n, h * 2):
+                    for j in range(i, i + h):
+                        x = a[j]
+                        y = a[j + h]
+                        a[j] = x + y
+                        a[j + h] = x - y
+                h <<= 1
+
+            if inverse:
+                for i in range(n):
+                    a[i] //= n
+
+        util(f)
+
+        for i in range(MAXI):
+            f[i] = f[i] ** 3
+
+        util(f, inverse=True)
+
+        return sum(1 for v in f if v > 0)
