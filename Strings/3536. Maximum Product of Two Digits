@@ -1,0 +1,6 @@
+class Solution:
+    def maxProduct(self, n: int) -> int:
+        s=str(n)
+        ls=list(s)
+        ls.sort()
+        return int(ls[-1])*int(ls[-2])
