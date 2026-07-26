@@ -1,0 +1,20 @@
+class Solution:
+    def minimumCost(self, nums: list[int], k: int) -> int:
+        MOD=10**9+7
+
+        res=0
+        cnt=0
+        val=k
+        n=len(nums)
+
+        for i in range(n):
+            if nums[i]>val:
+                need=nums[i]-val
+                t=need//k
+                if need%k!=0:
+                    t+=1
+                cnt+=t
+                val+=k*t
+            val-=nums[i]
+        res=cnt*(cnt+1)//2
+        return res%MOD
