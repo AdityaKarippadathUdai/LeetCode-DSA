@@ -1,0 +1,59 @@
+from collections import Counter
+
+class Solution:
+    def smallestPalindrome(self, s: str, k: int) -> str:
+
+        LIMIT = 10**6 + 1
+
+        def nCr(n, r):
+            r = min(r, n - r)
+            res = 1
+            for i in range(1, r + 1):
+                res = res * (n - r + i) // i
+                if res >= LIMIT:
+                    return LIMIT
+            return res
+
+        def countways(cnt):
+            total = sum(cnt)
+            res = 1
+            for f in cnt:
+                if f:
+                    res *= nCr(total, f)
+                    if res >= LIMIT:
+                        return LIMIT
+                    total -= f
+            return res
+
+        cnt = Counter(s)
+        mid = ""
+        half = [0] * 26
+
+        for ch, f in cnt.items():
+            if f & 1:
+                mid = ch
+            half[ord(ch) - 97] = f // 2
+
+        if countways(half) < k:
+            return ""
+
+        left = []
+        m = sum(half)
+
+        for _ in range(m):
+            for c in range(26):
+                if half[c] == 0:
+                    continue
+
+                half[c] -= 1
+                ways = countways(half)
+
+                if ways >= k:
+                    left.append(chr(c + 97))
+                    break
+                else:
+                    k -= ways
+                    half[c] += 1
+
+        left = "".join(left)
+        return left + mid + left[::-1]
