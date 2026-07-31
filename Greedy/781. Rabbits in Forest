@@ -1,0 +1,11 @@
+class Solution:
+    def numRabbits(self, answers: List[int]) -> int:
+        d=Counter(answers)
+
+        res=0
+        for k,val in d.items():
+            a=k+1
+            s=(val+k)//a
+            res+=a*s
+
+        return res
