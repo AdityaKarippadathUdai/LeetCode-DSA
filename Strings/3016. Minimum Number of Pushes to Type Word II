@@ -1,0 +1,12 @@
+class Solution:
+    def minimumPushes(self, word: str) -> int:
+        freq=Counter(word)
+
+        val=sorted(freq.values(),reverse=True)
+
+        res=0
+        for i,cnt in enumerate(val):
+            p=i//8+1
+            res+=p*cnt
+
+        return res
