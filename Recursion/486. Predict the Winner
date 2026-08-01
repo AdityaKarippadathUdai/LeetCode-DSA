@@ -1,0 +1,19 @@
+from functools import lru_cache
+class Solution:
+    def predictTheWinner(self, nums: List[int]) -> bool:
+        
+        @lru_cache(None)
+        def util(p1,p2,i,j,turn):
+            if i>j:
+                return p1>=p2
+            if turn==1:
+                sc1=util(p1+nums[i],p2,i+1,j,2) or util(p1+nums[j],p2,i,j-1,2)
+                return sc1
+            else:
+                sc2=util(p1,p2+nums[i],i+1,j,1) and util(p1,p2+nums[j],i,j-1,1)
+                return sc2
+
+            
+
+        n=len(nums)
+        return util(0,0,0,n-1,1)
