@@ -1,0 +1,31 @@
+from functools import lru_cache
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        
+        @lru_cache(None)
+        def build(start,end):
+            if start>end:
+                return [None]
+
+            trees=[]
+
+            for val in range(start,end+1):
+                lt=build(start,val-1)
+                rt=build(val+1,end)
+
+                for l in lt:
+                    for r in rt:
+                        root=TreeNode(val)
+                        root.left=l
+                        root.right=r
+                        trees.append(root)
+
+            return trees
+
+        return build(1,n)
