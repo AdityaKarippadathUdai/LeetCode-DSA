@@ -1,0 +1,16 @@
+class Solution:
+    def integerReplacement(self, n: int) -> int:
+        
+        @lru_cache(None)
+        def util(num):
+            if num==1:
+                return 0
+
+            if num%2==1:
+                r=min(util(num-1),util(num+1))
+            else:
+                r=util(num/2)
+
+            return 1+r
+
+        return util(n)
