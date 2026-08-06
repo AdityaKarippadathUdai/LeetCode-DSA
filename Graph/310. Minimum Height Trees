@@ -1,0 +1,40 @@
+class Solution:
+    def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
+        adj=defaultdict(list)
+
+        if n==1:
+            return [0]
+
+        deg=[0]*n
+
+
+        for u,v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+            deg[u]+=1
+            deg[v]+=1
+
+        leaf=deque()
+
+        for i in range(n):
+            if deg[i]==1:
+                leaf.append(i)
+
+        rem=n
+
+        while rem>2:
+            size=len(leaf)
+            rem-=size
+
+            for _ in range(size):
+                node=leaf.popleft()
+
+                for neighbor in adj[node]:
+                    deg[neighbor]-=1
+                    if deg[neighbor]==1:
+                        leaf.append(neighbor)
+
+        return list(leaf)
+
+        res=[]
+        
