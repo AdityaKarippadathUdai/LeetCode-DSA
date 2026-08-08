@@ -1,0 +1,56 @@
+from bisect import bisect_left
+
+class Solution:
+    def validSequence(self, word1: str, word2: str) -> list[int]:
+        n, m = len(word1), len(word2)
+        
+        last_match = [-1] * (m + 1)
+        last_match[m] = n
+        
+        i = n - 1
+        for j in range(m - 1, -1, -1):
+            while i >= 0 and word1[i] != word2[j]:
+                i -= 1
+            last_match[j] = i
+            if i >= 0:
+                i -= 1
+                
+        pos = {chr(c): [] for c in range(ord('a'), ord('z') + 1)}
+        for idx, ch in enumerate(word1):
+            pos[ch].append(idx)
+            
+        seq = []
+        i_w1 = 0
+        used_change = False
+        
+        for j in range(m):
+            target = word2[j]
+            
+            if not used_change:
+                if i_w1 < n and word1[i_w1] == target:
+                    seq.append(i_w1)
+                    i_w1 += 1
+                elif i_w1 < n and last_match[j + 1] > i_w1:
+                    seq.append(i_w1)
+                    i_w1 += 1
+                    used_change = True
+                else:
+                    lst = pos[target]
+                    idx = bisect_left(lst, i_w1)
+                    if idx < len(lst):
+                        match_idx = lst[idx]
+                        seq.append(match_idx)
+                        i_w1 = match_idx + 1
+                    else:
+                        return []
+            else:
+                lst = pos[target]
+                idx = bisect_left(lst, i_w1)
+                if idx < len(lst):
+                    match_idx = lst[idx]
+                    seq.append(match_idx)
+                    i_w1 = match_idx + 1
+                else:
+                    return []
+                    
+        return seq if len(seq) == m else []
