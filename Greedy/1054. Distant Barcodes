@@ -1,0 +1,19 @@
+from collections import defaultdict
+class Solution:
+    def rearrangeBarcodes(self, barcodes: List[int]) -> List[int]:
+        cnt = Counter(barcodes)
+        items = sorted(cnt.items(), key=lambda x: -x[1])
+
+        n = len(barcodes)
+        ans = [0] * n
+        index = 0
+
+        for value, count in items:
+            for _ in range(count):
+                ans[index] = value
+                index += 2
+
+                if index >= n:
+                    index = 1
+
+        return ans
