@@ -1,0 +1,24 @@
+from functools import lru_cache
+class Solution:
+    def findLongestChain(self, pairs: List[List[int]]) -> int:
+        pairs.sort()
+        n=len(pairs)
+        @lru_cache(None)
+        def util(ind):
+            if ind>=n:
+                return 0
+            res=0
+            for i in range(ind+1,n):
+                
+                if pairs[ind][1]<pairs[i][0]:
+                    res=max(res,1+util(i))
+
+            return res
+
+        res=0
+        for i in range(n):
+            res=max(res,util(i))
+
+        return res+1
+
+
