@@ -1,0 +1,36 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def rob(self, root: Optional[TreeNode]) -> int:
+        res=0
+
+
+        @lru_cache(None)
+        def recur(Node,take):
+            if Node is None:
+                return 0
+
+            res=0
+
+            if take:
+                if Node.right:
+                    res+=recur(Node.right,False)
+
+                if Node.left:
+                    res+=recur(Node.left,False)
+
+                return res+Node.val
+            else:
+                if Node.right:
+                    res+=max(recur(Node.right,False),recur(Node.right,True))
+
+                if Node.left:
+                    res+=max(recur(Node.left,False),recur(Node.left,True))
+            
+                return res
+
+        return max(recur(root,False),recur(root,True))
