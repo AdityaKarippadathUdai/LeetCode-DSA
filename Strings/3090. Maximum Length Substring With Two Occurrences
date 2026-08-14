@@ -1,0 +1,22 @@
+class Solution:
+    def maximumLengthSubstring(self, s: str) -> int:
+        res=2
+        n=len(s)
+        i=0
+        j=1
+
+        d=defaultdict(int)
+        d[s[i]]+=1
+        d[s[j]]+=1
+        while i<j and j<n-1:
+            j+=1
+            d[s[j]]+=1
+            while d[s[j]]>2:
+                d[s[i]]-=1
+                i+=1
+
+            res=max(res,j-i+1)
+
+
+        return res
+
