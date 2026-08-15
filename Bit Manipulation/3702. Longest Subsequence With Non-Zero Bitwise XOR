@@ -1,0 +1,17 @@
+class Solution:
+    def longestSubsequence(self, nums: List[int]) -> int:
+        x=0
+        n=len(nums)
+        zero=0
+        for a in nums:
+            if a==0:
+                zero+=1
+            x=x^a
+
+        if zero==n:
+            return 0
+
+        if x==0:
+            return n-1
+        else:
+            return n
