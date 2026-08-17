@@ -1,0 +1,15 @@
+class Solution:
+    def nearestDrone(self, drones: list[list[int]], target: list[int]) -> int:
+        tx, ty = target
+
+        bi = -1
+        bd = float('inf')
+
+        for i, (x, y, r) in enumerate(drones):
+            dis = abs(x - tx) + abs(y - ty)
+
+            if dis <= r and dis < bd:
+                bd = dis
+                bi = i
+
+        return bi 
