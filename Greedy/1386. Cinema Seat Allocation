@@ -1,0 +1,21 @@
+class Solution:
+    def maxNumberOfFamilies(self, n: int, reservedSeats: List[List[int]]) -> int:
+        rows = {}
+
+        for r, s in reservedSeats:
+            if 2 <= s <= 9:
+                rows[r] = rows.get(r, 0) | (1 << s)
+
+        res = (n - len(rows)) * 2
+
+        for i in rows.values():
+            l = all(not (i & (1 << s)) for s in range(2, 6))
+            m = all(not (i & (1 << s)) for s in range(4, 8))
+            r = all(not (i & (1 << s)) for s in range(6, 10))
+
+            if l and r:
+                res += 2
+            elif l or m or r:
+                res += 1
+
+        return res
