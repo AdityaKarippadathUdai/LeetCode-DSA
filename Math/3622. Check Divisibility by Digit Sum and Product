@@ -1,0 +1,13 @@
+class Solution:
+    def checkDivisibility(self, n: int) -> bool:
+        a = 0
+        b = 1
+
+        x = n
+        while x > 0:
+            digit = x % 10
+            a += digit
+            b *= digit
+            x //= 10
+
+        return n % (a + b) == 0
