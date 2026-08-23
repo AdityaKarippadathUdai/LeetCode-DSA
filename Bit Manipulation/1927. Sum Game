@@ -1,0 +1,15 @@
+class Solution:
+    def sumGame(self, num: str) -> bool:
+        n = len(num)
+        half = n // 2
+        
+        sum_L = sum(int(c) for c in num[:half] if c != '?')
+        q_L = num[:half].count('?')
+        
+        sum_R = sum(int(c) for c in num[half:] if c != '?')
+        q_R = num[half:].count('?')
+        
+        if (q_L + q_R) % 2 != 0:
+            return True
+        
+        return (sum_L - sum_R) != 4.5 * (q_R - q_L)
