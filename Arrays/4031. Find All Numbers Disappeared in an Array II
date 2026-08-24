@@ -1,0 +1,17 @@
+class Solution:
+    def findDisappearedNumbers(self, nums: list[int], lower: int, upper: int) -> list[list[int]]:
+        nums.sort()
+        res = []
+        prev = lower
+
+        for num in nums:
+            if num < lower or num > upper:
+                continue
+            if num > prev:
+                res.append([prev, num - 1])
+            prev = max(prev, num + 1)
+
+        if prev <= upper:
+            res.append([prev, upper])
+
+        return res
