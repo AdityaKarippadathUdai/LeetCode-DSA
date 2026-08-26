@@ -1,0 +1,24 @@
+class Solution:
+    def shortestBeautifulSubstring(self, s: str, k: int) -> str:
+        n = len(s)
+        l = 0
+        ones = 0
+        b = ""
+
+        for r in range(n):
+            if s[r] == '1':
+                ones += 1
+
+            while ones >= k:
+                if ones == k:
+                    curr = s[l:r + 1]
+
+                    if not b or len(curr) < len(b) or \
+                       (len(curr) == len(b) and curr < b):
+                        b = curr
+
+                if s[l] == '1':
+                    ones -= 1
+                l += 1
+
+        return b
