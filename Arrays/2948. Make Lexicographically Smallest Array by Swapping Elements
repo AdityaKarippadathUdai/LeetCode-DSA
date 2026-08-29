@@ -1,0 +1,23 @@
+class Solution:
+    def lexicographicallySmallestArray(self, nums: List[int], limit: int) -> List[int]:
+        
+        n=len(nums)
+        arr=sorted((val,i) for i,val in enumerate(nums))
+
+        res=nums[:]
+
+        i=0
+        while i<n:
+            j=i
+
+            while (j+1<n and arr[j+1][0]-arr[j][0] <=limit):
+                j+=1
+
+            ind=sorted(arr[i][1] for i in range(i,j+1))
+
+            for k,idx in enumerate(ind):
+                res[idx]=arr[i+k][0]
+
+            i=j+1
+
+        return res
