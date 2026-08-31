@@ -1,0 +1,15 @@
+class Solution:
+    def minBishopMoves(self, source: list[int], target: list[int]) -> int:
+        
+        ss=sum(source)
+        ts=sum(target)
+        if ss==ts:
+            return 1
+        
+        if (source[0]-target[0])==(source[1]-target[1]):
+            return 1
+
+        if ss%2!=ts%2:
+            return -1
+
+        return 2
