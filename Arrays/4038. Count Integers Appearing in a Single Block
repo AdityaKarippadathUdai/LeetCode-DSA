@@ -1,0 +1,16 @@
+from collections import Counter
+class Solution:
+    def countSpecialIntegers(self, nums: list[int]) -> int:
+        b = Counter()
+
+        for i in range(len(nums)):
+            if i == 0 or nums[i] != nums[i - 1]:
+                b[nums[i]] += 1
+
+        res = 0
+
+        for x in b:
+            if b[x] == 1:
+                res += 1
+
+        return res
