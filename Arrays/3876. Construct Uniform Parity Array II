@@ -1,0 +1,15 @@
+class Solution:
+    def uniformArray(self, nums1: list[int]) -> bool:
+        mo=float('inf')
+        me=float('inf')
+
+        for num in nums1:
+            if num%2==0:
+                me=min(me,num)
+            else:
+                mo=min(mo,num)
+
+        if mo==float('inf'):
+            return True
+        
+        return mo<me
