@@ -1,0 +1,15 @@
+class Solution:
+    def distinctSubseqII(self, s: str) -> int:
+        MOD=10**9+7
+
+        dp=1
+        ls=[0]*26
+
+        for ch in s:
+            c=ord(ch)-ord('a')
+            ndp=(2*dp-ls[c])%MOD
+
+            ls[c]=dp
+            dp=ndp
+
+        return (dp-1)%MOD
