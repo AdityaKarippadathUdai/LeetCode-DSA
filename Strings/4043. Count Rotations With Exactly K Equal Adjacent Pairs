@@ -1,0 +1,14 @@
+class Solution:
+    def countRotations(self, s: str, k: int) -> int:
+        a=s+s
+        n=len(s)
+        res=0
+        for i in range(n):
+            sc=0
+            for j in range(i,n+i-1):
+                if a[j]==a[j+1]:
+                    sc+=1
+            if sc==k:
+                res+=1
+
+        return res
