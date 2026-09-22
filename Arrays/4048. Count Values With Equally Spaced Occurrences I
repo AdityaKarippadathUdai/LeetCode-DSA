@@ -1,0 +1,17 @@
+class Solution:
+    def countSpecialIntegers(self, nums: list[int]) -> int:
+        pos = {}
+
+        for i, x in enumerate(nums):
+            pos.setdefault(x, []).append(i)
+
+        res = 0
+
+        for x, ind in pos.items():
+            if len(ind) == 3:
+                i1, i2, i3 = ind
+
+                if i2 - i1 == i3 - i2:
+                    res += 1
+
+        return res
