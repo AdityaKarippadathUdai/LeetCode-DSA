@@ -1,0 +1,28 @@
+class Solution:
+    def minOperations(self, nums: list[int], x: int) -> int:
+        n=len(nums)
+        targ=sum(nums)-x
+
+        if targ<0:
+            return -1
+
+        if targ==0:
+            return n
+
+        l=0
+        curs=0
+        ml=-1
+
+        for r in range(n):
+            curs+=nums[r]
+            while curs>targ and l<=r:
+                curs-=nums[l]
+                l+=1
+
+            if curs==targ:
+                ml=max(ml,r-l+1)
+
+        if ml==-1:
+            return -1
+
+        return n-ml
