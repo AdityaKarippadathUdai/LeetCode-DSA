@@ -1,0 +1,9 @@
+class Solution:
+    def smallestIndex(self, nums: List[int]) -> int:
+        for i, num in enumerate(nums):
+            a = sum(map(int, str(num)))
+
+            if a == i:
+                return i
+
+        return -1
