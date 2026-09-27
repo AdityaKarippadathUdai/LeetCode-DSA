@@ -1,0 +1,16 @@
+class Solution:
+    def reverseParentheses(self, s: str) -> str:
+        st = [""]
+
+        for ch in s:
+            if ch == "(":
+                st.append("")
+
+            elif ch == ")":
+                current = st.pop()
+                st[-1] += current[::-1]
+
+            else:
+                st[-1] += ch
+
+        return st[0]
