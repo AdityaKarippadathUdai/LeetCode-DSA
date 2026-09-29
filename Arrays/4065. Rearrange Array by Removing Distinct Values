@@ -1,0 +1,22 @@
+class Solution:
+    def rearrangeArray(self, nums: list[int]) -> list[int]:
+        freq = [0] * 101
+
+        for x in nums:
+            freq[x] += 1
+
+        res = []
+
+        while True:
+            added = False
+
+            for x in range(1, 101):
+                if freq[x] > 0:
+                    res.append(x)
+                    freq[x] -= 1
+                    added = True
+
+            if not added:
+                break
+
+        return res
