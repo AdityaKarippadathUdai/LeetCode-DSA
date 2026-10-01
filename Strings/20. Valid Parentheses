@@ -1,0 +1,23 @@
+class Solution(object):
+    def isValid(self, s):
+        st = []
+        h = {'(': ')', '[': ']', '{': '}'}
+        d = ['{','(','[']
+        for a in s:
+            if a in d:  
+                st.append(a)
+            
+            elif a=='*':
+                st.append(a)
+            else:  
+                if not st:  
+                    return False
+                top = st.pop()
+                if top=='*':
+                    continue
+                if h[top] != a:  
+                    return False
+        
+        return not st  
+
+        
