@@ -1,0 +1,15 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        def validparentheses(n,opencount,curr,res):
+            if len(curr)==2*n:
+                res.append(curr)
+                return
+            
+            if opencount<n:
+                validparentheses(n,opencount+1,curr+'(',res)
+            if len(curr)-opencount<opencount:
+                validparentheses(n,opencount,curr+')',res)
+            
+        res=[]
+        validparentheses(n,0,'',res)
+        return res
