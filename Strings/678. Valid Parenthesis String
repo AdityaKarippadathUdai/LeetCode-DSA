@@ -1,0 +1,23 @@
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        mno=0
+        mxo=0
+        n=len(s)
+        for i in range(n):
+            if s[i]=="(":
+                mno+=1
+                mxo+=1
+            elif s[i]==")":
+                mno-=1
+                mxo-=1
+            else:
+                mno-=1
+                mxo+=1
+
+            if mxo<0:
+                return False
+
+            if mno<0:
+                mno=0
+
+        return mno==0
