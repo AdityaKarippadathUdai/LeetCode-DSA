@@ -1,0 +1,14 @@
+class Solution:
+    def minRotations(self, s: str) -> int:
+        curr = 0
+        res = 0
+
+        for ch in s:
+            a = int(ch)
+
+            dis = abs(curr - a)
+            res += min(dis, 10 - dis)
+
+            curr = a
+
+        return res
