@@ -1,0 +1,20 @@
+class Solution:
+    def threeFibonacciSum(self, n: int) -> bool:
+        if n==0 or n==1:
+            return False
+
+        a=0
+        b=1
+        c=1
+        s=2
+        while s<=n:
+            if s==n:
+                return True
+            
+            d=b+c
+            a=b
+            b=c
+            c=d
+            s=a+b+c
+
+        return False
