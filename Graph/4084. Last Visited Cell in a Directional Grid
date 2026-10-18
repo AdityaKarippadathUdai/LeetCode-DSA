@@ -1,0 +1,27 @@
+class Solution:
+    def lastVisitedCell(self, grid: list[list[str]]) -> list[int]:
+        m, n = len(grid), len(grid[0])
+        visited = set()
+        r, c = 0, 0
+
+        while True:
+            visited.add((r, c))
+
+            if grid[r][c] == 'L':
+                nr, nc = r, c - 1
+            elif grid[r][c] == 'R':
+                nr, nc = r, c + 1
+            elif grid[r][c] == 'U':
+                nr, nc = r - 1, c
+            else:  
+                nr, nc = r + 1, c
+
+            if not (0 <= nr < m and 0 <= nc < n):
+                break
+
+            if (nr, nc) in visited:
+                break
+
+            r, c = nr, nc
+
+        return [r, c]
