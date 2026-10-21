@@ -1,0 +1,20 @@
+class Solution:
+    def minOperations(self, s: str) -> int:
+        length = len(s)
+
+        if s == ''.join(sorted(s)):
+            return 0
+
+        if length == 2:
+            return -1
+
+        smallest = min(s)
+        largest = max(s)
+
+        if s[0] == smallest or s[-1] == largest:
+            return 1
+
+        if any(ch == smallest or ch == largest for ch in s[1:-1]):
+            return 2
+
+        return 3
