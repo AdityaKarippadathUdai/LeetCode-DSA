@@ -1,0 +1,19 @@
+import heapq
+class Solution:
+    def assignTasks(self, servers: list[int], tasks: list[int]) -> list[int]:
+        a = [(w, i) for i, w in enumerate(servers)]
+        heapify(a)
+
+        res=[]
+        b = []
+
+        for s, t in enumerate(tasks):
+            while b and b[0][0] <= s:
+                heappush(a, heappop(b)[1:])
+
+            s, w, i = (s, *heappop(a)) if a else heappop(b)
+
+            heappush(b, (s + t, w, i))
+            res.append(i)
+
+        return res
