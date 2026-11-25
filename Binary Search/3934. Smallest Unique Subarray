@@ -1,0 +1,34 @@
+class Solution:
+    def smallestUniqueSubarray(self, nums: List[int]) -> int:
+        n=len(nums)
+        MOD=(1<<64)
+        BASE=131
+
+        def uniquesubarray(l):
+            power=pow(BASE,l,MOD)
+            f=defaultdict(int)
+            h=0
+
+            for i in range(l):
+                h=(h*BASE+nums[i])%MOD
+
+            f[h]+=1
+
+            for i in range(l,n):
+                h=(h*BASE+nums[i]-power*nums[i-l])%MOD
+                f[h]+=1
+
+            return any(v==1 for v in f.values())
+
+
+        l=1
+        h=n
+
+        while l<h:
+            mid=(l+h)//2
+            if uniquesubarray(mid):
+                h=mid
+            else:
+                l=mid+1
+
+        return l
